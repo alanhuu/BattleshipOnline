@@ -12,6 +12,7 @@ Current features:
 * Reloading saved games works.
 
 Features that still need work:
+* Must restructure the code to be more object oriented. The code is a mess right now, need structuring because i did not feel like using objects at the time this was coded.
 * Allowing 2+ players to connect.
 * Have the server handle multiple games at once.
 * Add password to user accounts.
