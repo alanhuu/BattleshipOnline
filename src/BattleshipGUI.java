@@ -35,7 +35,7 @@ public class BattleshipGUI {
     private static int enemyLevel, enemyWins = 0;
     private static boolean ready = false;
 
-    public static void main(String[] args) throws IOException {
+    public static void maint(String[] args) throws IOException {
         playerMsg.setEditable(false); //so people can't edit the player msg board
         cpuMsg.setEditable(false); //so people can't edit the cpu msg board
 
