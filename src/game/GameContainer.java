@@ -46,24 +46,28 @@ public class GameContainer extends JFrame {
     private static final String GAME_TITLE = "Battleship Client v.12";
     private static JFileChooser fileOpen = new JFileChooser();
     public static File file;
-    private static JLabel[][] pbLabels = new JLabel[10][11], cbLabels = new JLabel[10][11];
-    private JTextArea playerMsg = new JTextArea("Please open the PLAYER.txt file!", 2, 10), cpuMsg = new JTextArea("Please open the CPU.txt file!", 2, 10);
-    private static JPanel menuPanel = new JPanel(new GridLayout(1, 0)), compBoardPanel = new JPanel(new GridLayout(10, 11)), playerBoard = new JPanel(new GridLayout(10, 11));
-    private static JButton[][] buttonC = new JButton[10][10];
-    private static JButton menuButton = new JButton("Enter");
-    private static int cpuHits = 0, playerHits = 0, level = 0, wins = 0;
+
+    private JTextArea playerMsg = new JTextArea("Please open the PLAYER.txt file!", 2, 10);
+    private JTextArea cpuMsg = new JTextArea("Please open the CPU.txt file!", 2, 10);
+    private JPanel menuPanel = new JPanel(new GridLayout(1, 0));
+    private JButton menuButton = new JButton("Enter");
+    
     private static String[] shipNames = {"Carrier", "Battleship", "Submarine", "Destroyer", "Patrol Boat"};
     private static String ships = "CBSDP", index = "ABCDEFGHIJ";
-    private static JFrame frame = new JFrame("Battleship Client v.12");
+
     private static JPanel panel = new JPanel(new BorderLayout()), bigPanel = new JPanel();
     private static JTabbedPane tabbedPane = new JTabbedPane();
     public static Socket sock;
     public static BufferedReader input;
     private static PrintWriter output;
-    private String userIGN = "Alan", enemyIGN = "CPU";
+    
+    private String userIGN = "Alan";
+    
+    private String enemyIGN = "CPU";
+    
     private static JTextField userNameField = new JTextField(6);
     private static JTextField passwordField = new JTextField(10);
-    private static int enemyLevel, enemyWins = 0;
+
     private static boolean ready = false;
 
     private final String IMAGE_PATH = "./src/images/";
@@ -178,7 +182,7 @@ public class GameContainer extends JFrame {
         //Label Panel(columns)
         JPanel labelPanel = new JPanel(new GridLayout(0, 1));
         JLabel playerBoardCol = new JLabel();
-        playerBoardCol.setIcon(new ImageIcon(".\\src\\images\\cols.png"));
+        playerBoardCol.setIcon(new ImageIcon(IMAGE_PATH + "cols.png"));
         labelPanel.add(playerBoardCol);
         panel.add(labelPanel, BorderLayout.PAGE_START); //puts the column labels at the very top of the window (frame)
 
@@ -227,7 +231,7 @@ public class GameContainer extends JFrame {
         menuButton.setActionCommand("ENTER");
         this.setContentPane(bigPanel);
         bigPanel.add(tabbedPane);
-        frame.pack();
+        this.pack();
         
     }
 
@@ -235,22 +239,22 @@ public class GameContainer extends JFrame {
     private void disableBoards() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
-                buttonC[row][col].setEnabled(false);
-                buttonC[row][col].updateUI();
+                enemyBoard.getButtons()[row][col].setEnabled(false);
+                enemyBoard.getButtons()[row][col].updateUI();
             }
         }
     }
 
-    private static void enableBoards() {
+    private void enableBoards() {
         for (int row = 0; row < 10; row++) {
             for (int col = 0; col < 10; col++) {
-                buttonC[row][col].setEnabled(true);
-                buttonC[row][col].updateUI();
+                enemyBoard.getButtons()[row][col].setEnabled(true);
+                enemyBoard.getButtons()[row][col].updateUI();
             }
         }
     }
 
-    private static void load(JLabel[][] board) throws IOException {
+    private void load(JLabel[][] board) throws IOException {
         try {
             String content = input.readLine();
             //while (content.equals(null)) {
@@ -268,7 +272,7 @@ public class GameContainer extends JFrame {
     }
     //copies the content on the files onto the JLabel arrays in order to be used by the boards
 
-    private static void loadFile(JLabel[][] board, File fileName, boolean isCpu) throws IOException {
+    private void loadFile(JLabel[][] board, File fileName, boolean isCpu) throws IOException {
         BufferedReader inputStream = null;
         try {
             inputStream = new BufferedReader(new FileReader(fileName));
@@ -280,7 +284,7 @@ public class GameContainer extends JFrame {
                         char temp = pieces.nextToken().charAt(0);
                         if (temp == 'H' || temp == 'M') {
                             if (isCpu == true) {
-                                buttonC[row][col].setIcon(new ImageIcon(".\\src\\images\\" + temp + ".jpg"));
+                                enemyBoard.getButtons()[row][col].setIcon(new ImageIcon(".\\src\\images\\" + temp + ".jpg"));
                                 board[row][col + 1].setText("" + temp);
                             } else {
                                 board[row][col + 1].setIcon(new ImageIcon(".\\src\\images\\" + temp + ".jpg"));

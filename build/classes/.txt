@@ -1,0 +1,20 @@
+commit 6b561b9f9a576f5e36663d37117acb6d229108f3
+tree 2e9afae61d693069bbdbf787279abc73df698a30
+parent 6890a1b596a6a42c0ffbc1f500defe488ff3c8c7
+author Alan Hu <ahu@bigvikinggames.com> 1468106544 -0400
+committer GitHub <noreply@github.com> 1468106544 -0400
+
+    Update README.md
+
+diff --git a/README.md b/README.md
+index 74700ff..b5da7c5 100644
+--- a/README.md
++++ b/README.md
+@@ -12,6 +12,7 @@ Current features:
+ * Reloading saved games works.
+ 
+ Features that still need work:
++* Must restructure the code to be more object oriented. The code is a mess right now, need structuring because i did not feel like using objects at the time this was coded.
+ * Allowing 2+ players to connect.
+ * Have the server handle multiple games at once.
+ * Add password to user accounts.
