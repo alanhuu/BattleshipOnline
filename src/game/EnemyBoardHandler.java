@@ -55,7 +55,7 @@ public class EnemyBoardHandler implements ActionListener {
                 if (e.getActionCommand().equals("" + row + col)) {
                     //action for a miss
                     if (makeValidAttack(enemyLabels, row, col + 1).equals("M")) {
-                        enemyBoard.getButtons()[row][col].setIcon(new ImageIcon(".\\src\\images\\M.jpg"));
+                        enemyBoard.getButtons()[row][col].setIcon(new ImageIcon(game.getImagePath() + "M.jpg"));
                         game.getPlayerMsgArea().setText(game.getUserIGN() + "! \nYou have missed!");
                         enemyLabels[row][col + 1].setText("M");
 //                        try {
@@ -69,7 +69,7 @@ public class EnemyBoardHandler implements ActionListener {
 //                        } catch (IOException ex) {
 //                        }
                     } else if (!makeValidAttack(enemyLabels, row, col + 1).equals("M") && !makeValidAttack(enemyLabels, row, col + 1).equals("N")) {
-                        buttonC[row][col].setIcon(new ImageIcon("./src/images/H.jpg"));
+                        buttonC[row][col].setIcon(new ImageIcon(game.getImagePath() +  "H.jpg"));
                         cpuHitPoints[ships.indexOf(makeValidAttack(enemyLabels, row, col + 1))]--;
                         game.getPlayerMsgArea().setText("Direct hit! Good job! " + game.getUserIGN());
 //                        try {
@@ -131,8 +131,8 @@ public static String makeValidAttack(JLabel[][] board, int row, int col) { //che
 
     private void endGame() {
         for (int row = 0; row < 10; row++) {
-            userLabels[row][0] = new JLabel(new ImageIcon("./src/images/" + index.charAt(row) + ".png"));
-            enemyLabels[row][0] = new JLabel(new ImageIcon("./src/images/" + index.charAt(row) + ".png"));
+            userLabels[row][0] = new JLabel(new ImageIcon(game.getImagePath() +  + index.charAt(row) + ".png"));
+            enemyLabels[row][0] = new JLabel(new ImageIcon(game.getImagePath() +  + index.charAt(row) + ".png"));
             for (int col = 0; col < 10; col++) {
                 userLabels[row][col + 1].disable();
                 userLabels[row][col + 1].updateUI();
@@ -154,13 +154,13 @@ public static String makeValidAttack(JLabel[][] board, int row, int col) { //che
         } while (makeValidAttack(userLabels, rowC, colC + 1).equals("N"));
         //action for a miss
         if (makeValidAttack(userLabels, rowC, colC + 1).equals("M")) {
-            userLabels[rowC][colC + 1].setIcon(new ImageIcon("./src/images/M.jpg"));
+            userLabels[rowC][colC + 1].setIcon(new ImageIcon(game.getImagePath() + "M.jpg"));
             game.getEnemyMsgArea().setText("The computer has attacked " + index.charAt(rowC) + colC + " and missed!");
             userLabels[rowC][colC + 1].setText("M");
             //action for a hit
         } else if (!makeValidAttack(userLabels, rowC, colC + 1).equals("M") && !makeValidAttack(userLabels, rowC, colC + 1).equals("N")) {
             String shipName = game.getShipFullName(ships.indexOf(makeValidAttack(userLabels, rowC, colC + 1)));
-            userLabels[rowC][colC + 1].setIcon(new ImageIcon("./src/images/H.jpg"));
+            userLabels[rowC][colC + 1].setIcon(new ImageIcon(game.getImagePath() + "H.jpg"));
             playerHitPoints[ships.indexOf(makeValidAttack(userLabels, rowC, colC + 1))]--;
             game.getEnemyMsgArea().setText("The computer has attacked " + index.charAt(rowC) + colC + " and hit your " + shipName);
             if (playerHitPoints[ships.indexOf(makeValidAttack(userLabels, rowC, colC + 1))] == 0) {
