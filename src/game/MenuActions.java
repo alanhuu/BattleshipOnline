@@ -86,9 +86,14 @@ public class MenuActions implements ActionListener {
             System.exit(0);
         } else if (e.getActionCommand().equals("START")) {
         } else if (e.getActionCommand().equals("ENTER")) {
-            game.setUserName(game.getValueFromNameField());
-            System.out.println(game.getUserIGN());
-            game.changeTabToGame();
+            if (game.getValueFromNameField().equals("")) {
+                JOptionPane.showMessageDialog(game, "Please set a name!");
+            } else {
+                game.setUserName(game.getValueFromNameField());
+                System.out.println(game.getUserIGN());
+                game.changeTabToGame();
+                // Removing the login screen.
+                game.getTabbedPane().remove(0);
 //            if (!ready) {
 //                playerMsg.setText("Welcome " + user + "! \nWaiting for an opponent to connect...");
 //            } else {
@@ -100,6 +105,7 @@ public class MenuActions implements ActionListener {
 //                //output.println("PASS" + passwordField.getText());
 //            } finally {
 //            }
+            }
         }
 
     }
@@ -142,4 +148,3 @@ public class MenuActions implements ActionListener {
         }
     }
 }
-
