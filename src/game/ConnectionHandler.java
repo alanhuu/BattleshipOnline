@@ -6,15 +6,11 @@
 package game;
 
 
-import static game.GameContainer.input;
-import static game.GameContainer.sock;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -49,7 +45,7 @@ public class ConnectionHandler {
     public void waitForOpponentConnection(EnemyBoard enemyBoard) throws IOException {
         while (true) {
             if (input.readLine().equals("READY")) {
-                load(enemyBoard.getBoardLabels());
+                game.load(enemyBoard.getBoardLabels(), input);
                 enemyBoard.startGame();
                 game.getPlayerMsgArea().setText("An opponent has connected!");
                 System.out.println("An opponent has connected!");
